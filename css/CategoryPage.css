@@ -1,0 +1,146 @@
+/* CategoryPage.css
+   ─────────────────────────────────────────────────────────────
+   ShopMallAll.css와 중복되지 않는(또는 덮어써야 하는) 스타일만 정의합니다.
+───────────────────────────────────────────────────────────────── */
+
+/* 1) 페이지 레이아웃 */
+.category-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.category-page-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+/* 2) 카드 그리드: 기본 gap과 margin을 새롭게 설정 */
+.category-grid {
+  /* ShopMallAll.css 에서는 gap:30px, margin:50px 0 이었으므로 재정의 */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* 3) 카드 컨테이너: 둥근 모서리와 hover 효과를 좀 더 강조 */
+.category-card {
+  background-color: #ffffff;
+  border-radius: 12px; /* ShopMallAll.css의 10px 대신 12px으로 조정 */
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* 4) 이미지 영역: 높이 및 그라데이션 배경 재정의 */
+.category-image {
+  width: 100%;
+  height: 180px; /* ShopMallAll.css의 180px 유지 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa; /* 이미지 없는 경우 연한 회색 배경 */
+  position: relative;
+}
+
+/* 실제 이미지가 있는 경우 */
+.category-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 아이콘 전용 카드: 그라데이션 배경 (ShopMallAll.css의 일반 그라데이션 대신 이곳에서만 적용) */
+.category-image.icon-bg {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+}
+
+.category-image.icon-bg i {
+  color: #ffffff;
+  font-size: 2.5rem;
+}
+
+/* 5) 제목 영역: 텍스트 중앙 정렬, 여백 조정 */
+.category-text {
+  padding: 1rem;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  background-color: #ffffff;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 6) 반응형 재정의 */
+@media (max-width: 1024px) {
+  .category-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.2rem;
+  }
+  .category-image {
+    height: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  .category-page {
+    padding: 1.5rem 0.8rem;
+  }
+  .category-page-title {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .category-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+  .category-image {
+    height: 140px;
+  }
+  .category-image.icon-bg i {
+    font-size: 2.2rem;
+  }
+  .category-text {
+    font-size: 0.95rem;
+    padding: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .category-page {
+    padding: 1rem 0.5rem;
+  }
+  .category-page-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+  .category-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+  .category-image {
+    height: 120px;
+  }
+  .category-image.icon-bg i {
+    font-size: 2rem;
+  }
+  .category-text {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+}

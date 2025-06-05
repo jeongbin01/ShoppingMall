@@ -1,0 +1,175 @@
+/* 카드 프리뷰 (기존 .card-preview) */
+.card-preview {
+    background-color: #ffffff;
+    /* 순수 흰색 배경 */
+    color: #333333;
+    /* 어두운 회색 텍스트 */
+    padding: 20px;
+    border-radius: 12px;
+    position: relative;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    /* 얇은 그림자 */
+    border: 1px solid #e0e0e0;
+    /* 연한 회색 테두리 */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+}
+
+.card-preview:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* 카드 번호 (전체 표시) */
+.card-preview .card-number {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+    font-family: 'Courier New', monospace;
+    color: #222;
+    /* 번호는 더 어두운 색으로 */
+}
+
+/* 카드 상세 정보 (카드 타입, 유효기간, CVC, 등록일) */
+.card-preview .card-details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.85rem;
+    color: #555;
+    /* 회색 계열 텍스트 */
+}
+
+.card-preview .card-type {
+    background-color: #f1f1f1;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #333;
+}
+
+.card-preview .card-expiry-detail,
+.card-preview .card-cvc-detail {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.card-preview .card-expiry-detail .label,
+.card-preview .card-cvc-detail .label {
+    font-weight: 500;
+    color: #333;
+}
+
+.card-preview .card-expiry-detail .value,
+.card-preview .card-cvc-detail .value {
+    font-family: 'Courier New', monospace;
+    color: #333;
+}
+
+/* 등록일 */
+.card-preview .card-registered {
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: #777;
+}
+
+/* 소유자 이름 */
+.card-preview .card-owner {
+    color: #444;
+}
+
+/* 삭제 버튼 (X 아이콘) */
+.card-preview .delete-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    color: #555;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.card-preview .delete-btn:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* ================================
+   카드사별 로고/테두리 색 (선택 사항)
+   ================================ */
+
+/* Visa */
+.visa {
+    border-color: #1e3c72;
+    /* Visa 파란색 계열 테두리 */
+}
+
+.visa .card-logo img {
+    /* 로컬에 images/visa.png 파일을 두고 사용 */
+    content: url('../images/visa.png');
+}
+
+/* MasterCard */
+.mastercard {
+    border-color: #eb3349;
+    /* MasterCard 빨간색 계열 테두리 */
+}
+
+.mastercard .card-logo img {
+    content: url('../images/mastercard.png');
+}
+
+/* American Express */
+.americanexpress {
+    border-color: #0f4c75;
+    /* AmEx 약간 진한 파란색 */
+}
+
+.americanexpress .card-logo img {
+    content: url('../images/amex.png');
+}
+
+/* Discover */
+.discover {
+    border-color: #f78d1e;
+    /* Discover 주황색 계열 */
+}
+
+.discover .card-logo img {
+    content: url('../images/discover.png');
+}
+
+/* Unknown 또는 기타 카드: 기본 흰색 테두리 유지 */
+.unknown {
+    border-color: #cccccc;
+}
+
+@media (max-width: 768px) {
+    .mypage-wrapper {
+        flex-direction: column;
+    }
+
+    .snb_area {
+        width: 100%;
+    }
+
+    .card-preview {
+        margin-bottom: 1rem;
+    }
+
+    .register-box {
+        margin-bottom: 2rem;
+    }
+}

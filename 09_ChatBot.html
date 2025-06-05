@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>문의 채팅 예시 (전체 화면)</title>
+    <!-- 외부 CSS 연결 -->
+    <link rel="stylesheet" href="css/customer.css" />
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- 외부 JS 연결 (반드시 jQuery 아래에) -->
+    <script src="js/customer.js" defer></script>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            문의 채팅 고객센터
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- 초기 운영자 환영 메시지 -->
+            <div class="message admin">안녕하세요! 무엇을 도와드릴까요?</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="메시지를 입력하세요..." />
+            <button id="sendBtn">전송</button>
+        </div>
+    </div>
+</body>
+</html>

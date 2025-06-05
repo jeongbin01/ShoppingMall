@@ -1,0 +1,530 @@
+/* ================================
+   ★ 기본 리셋 및 폰트 설정
+   ================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    /* font-family: 'Noto Sans KR', sans-serif; */
+    background-color: #ececec;
+    /* 본문 회색 통일 */
+    color: #333;
+}
+
+/* 링크 기본 스타일 제거 */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 버튼 기본 스타일 */
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-family: inherit;
+}
+
+/* 공통 .btn 클래스 */
+.btn {
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 구매 버튼 (빨강) */
+.btn-buy {
+    background-color: #f44336;
+    /* 붉은 계열 */
+    color: #fff;
+    margin-right: 12px;
+}
+
+.btn-buy:hover {
+    background-color: #d32f2f;
+}
+
+/* 판매 버튼 (녹색) */
+/* .btn-sell {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.btn-sell:hover {
+    background-color: #388e3c;
+} */
+
+/* ================================
+   CSS 변수 선언
+   ================================= */
+:root {
+    --header-bg-color: #4a4a4a;
+    /* 헤더 배경색 (진한 회색) */
+    --header-text-color: #ffffff;
+    /* 헤더 텍스트(링크/로고) 색상 */
+    --card-bg-color: #ffffff;
+    /* 카드(메인) 배경색 */
+    --main-bg-color: #ececec;
+    /* 본문 배경색 */
+    --accent-color: #ff9800;
+    /* 강조 색 (입찰가 등) */
+    --footer-bg-color: #4a4a4a;
+    /* 푸터 배경색 */
+    --footer-text-color: #ffffff;
+    /* 푸터 텍스트 색상 */
+    --primary-color: #28a745;
+    --secondary-color: #ffc107;
+    --accent-color: #17a2b8;
+}
+
+/* ================================
+   1) Header 스타일
+   ================================= */
+/* 공통 Header 컨테이너 */
+.header {
+    width: 100%;
+    background-color: var(--header-bg-color);
+}
+
+/* ─── 1단계 바: 상단 인증 링크 바 ─── */
+.header-top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 8px 20px;
+    background-color: var(--header-bg-color);
+    font-size: 0.9rem;
+}
+
+.header-top-bar .auth-links a {
+    color: var(--header-text-color);
+    margin-left: 12px;
+    transition: color 0.15s;
+}
+
+.header-top-bar .auth-links a:hover {
+    color: #ddd;
+}
+
+/* ─── 2단계 바: 로고 + 검색창 + 햄버거 ─── */
+.header-search-bar {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background-color: var(--header-bg-color);
+    gap: 16px;
+}
+
+/* 2-1) 로고 영역 (좌측) */
+.header-search-bar .logo {
+    display: flex;
+    align-items: center;
+    margin-top: -2%;
+}
+
+.header-search-bar .logo h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--header-text-color);
+    margin: 0;
+    line-height: 1;
+}
+
+/* 2-2) 검색창 전체 박스(가운데) */
+.header-search-bar .search-box {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    max-width: 600px;
+    margin: 0 20px;
+    background-color: var(--card-bg-color);
+    border: none;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 40px;
+}
+
+.header-search-bar .search-box .search-input {
+    flex: 1;
+    padding: 0 12px;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    height: 100%;
+}
+
+.header-search-bar .search-box .search-input::placeholder {
+    color: #aaa;
+}
+
+.header-search-bar .search-box .search-btn {
+    background-color: #ffffff;
+    color: #333;
+    padding: 0 12px;
+    font-size: 1rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ─── 2-3) 햄버거 버튼 (우측) ─── */
+.header-search-bar .hamburger-btn {
+    width: 44px;
+    height: 44px;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 4px;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    transition: background-color 0.2s ease;
+}
+
+.header-search-bar .hamburger-btn:hover {
+    background-color: #f2f2f2;
+}
+
+/* ─── 2-4) 서브메뉴 (햄버거 클릭 시 나타남) ─── */
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+}
+
+.submenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+}
+
+.submenu ul li {
+    padding: 8px 16px;
+    white-space: nowrap;
+}
+
+.submenu ul li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.submenu ul li:hover {
+    background-color: #f2f2f2;
+}
+
+/* ================================
+   2) Main 영역: 제품 상세
+   ================================= */
+.main-content {
+    background-color: var(--main-bg-color);
+    padding: 30px 20px;
+    width: 120%;
+}
+
+/* 제품 상세 컨테이너 */
+.product-container {
+    display: flex;
+    max-width: 1100px;
+    margin: 0 auto;
+    gap: 40px;
+}
+
+/* 1) 이미지 갤러리 */
+.image-gallery {
+    flex: 1 1 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.image-gallery .main-image-box {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #fafafa;
+    text-align: center;
+}
+
+.image-gallery .main-image-box img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.image-gallery .thumbnail-box {
+    display: flex;
+    gap: 8px;
+}
+
+.image-gallery .thumbnail-box .thumbnail {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    object-fit: cover;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.image-gallery .thumbnail-box .thumbnail.active {
+    border-color: #2196f3;
+    opacity: 1;
+}
+
+/* 2) 제품 정보 */
+.product-details {
+    flex: 1 1 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.product-details .product-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.price-section .current-price {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-top: 4px;
+}
+
+.price-section .current-price strong {
+    font-size: 1.8rem;
+    color: #f44336;
+}
+
+.option-section {
+    margin-top: 12px;
+}
+
+.option-section label {
+    font-weight: 500;
+    margin-right: 8px;
+}
+
+.option-section select {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.meta-info {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+.meta-info .meta-label {
+    font-weight: 500;
+    margin-right: 6px;
+}
+
+.meta-info .meta-change {
+    color: #4caf50;
+}
+
+/* 구매/판매 버튼 영역 */
+.action-buttons {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.action-buttons .btn-buy,
+.action-buttons .btn-sell {
+    font-size: 1rem;
+    height: 48px;
+}
+
+.action-buttons .btn-buy span,
+.action-buttons .btn-sell span {
+    margin-left: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* 관심상품 */
+.favorite-section {
+    margin-top: 12px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.favorite-section .favorite-icon {
+    color: #ff9800;
+    margin-right: 4px;
+}
+
+.favorite-section .favorite-count {
+    font-weight: 600;
+}
+
+/* 추가 혜택 / 배송 정보 */
+.extra-info {
+    margin-top: 24px;
+}
+
+.extra-info h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.extra-info ul {
+    list-style: disc inside;
+    margin-left: 16px;
+}
+
+.extra-info ul li {
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* ================================
+   3) Footer (화면 하단 고정)
+   ================================= */
+/* 푸터 스타일 */
+.footer-section {
+    background: #2c3e50;
+    color: white;
+    padding: 40px 0;
+    margin-top: 60px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-section h5 {
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.footer-section p,
+.footer-section a {
+    color: #ecf0f1;
+    text-decoration: none;
+    line-height: 1.8;
+}
+
+.footer-section a:hover {
+    color: var(--secondary-color);
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-icons a {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+/* .footer {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--footer-bg-color);
+    color: var(--footer-text-color);
+    padding: 20px 0;
+    z-index: 1000;
+}
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+.footer-container p {
+    font-size: 0.9rem;
+    margin: 4px 0;
+} */
+
+/* ================================
+   4) 반응형 예시 (너비 992px 이하)
+   ================================= */
+@media (max-width: 992px) {
+    .product-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-gallery {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .product-details {
+        width: 100%;
+    }
+
+    .header-search-bar .search-box {
+        width: 70%;
+    }
+
+    .header-search-bar .hamburger-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        padding-top: 4px;
+    }
+
+    .submenu {
+        right: 0;
+        left: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .submenu ul li {
+        text-align: center;
+    }
+}

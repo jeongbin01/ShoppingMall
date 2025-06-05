@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopMall - 온라인 쇼핑몰</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #28a745;
+            --secondary-color: #ffc107;
+            --accent-color: #17a2b8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            color: white;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            border-radius: 25px;
+            padding: 12px 50px 12px 20px;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--secondary-color);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: #e0a800;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .header-buttons .btn {
+            border-radius: 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 0.85rem;
+            padding: 8px 15px;
+        }
+
+        .header-buttons .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+        }
+
+        .btn-divider {
+            width: 1px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 0 5px;
+        }
+
+        .btn-outline-light:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+
+        .navbar-nav .nav-link {
+            color: #333;
+            font-weight: 500;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .navbar-toggler {
+            border: 2px solid #333;
+            padding: 4px 8px;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        .carousel-item {
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .carousel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-content {
+            text-align: center;
+            color: white;
+        }
+
+        .carousel-content h2 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            position: relative;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .category-image {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 실제 이미지가 있는 경우의 스타일 */
+        .category-image img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* 아이콘만 있는 경우의 배경색 */
+        .category-image:not(:has(img)) {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        }
+
+        .category-image i {
+            z-index: 2;
+            position: relative;
+        }
+
+        .category-title {
+            padding: 20px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #333;
+        }
+
+        .footer-section {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h5 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ecf0f1;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .badge-notification {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 10px 0;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .search-input {
+                font-size: 14px;
+                padding: 10px 45px 10px 15px;
+            }
+
+            .header-buttons {
+                flex-wrap: wrap;
+                gap: 5px !important;
+            }
+
+            .header-buttons .btn {
+                font-size: 0.7rem;
+                padding: 4px 8px;
+            }
+
+            .btn-divider {
+                display: none;
+            }
+
+            .carousel-content h2 {
+                font-size: 2rem;
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 15px;
+            }
+
+            .category-image {
+                height: 150px;
+                font-size: 2rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .navbar-collapse {
+                display: flex !important;
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .side-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .widget-box {
+            width: 120px;
+            background: white;
+            border: 1px solid #ccc;
+            text-align: center;
+            font-size: 13px;
+            padding: 12px 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .widget-box:hover {
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .widget-box .title {
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .widget-box .content {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .widget-box.top-btn {
+            background: #f1f1f1;
+            font-weight: bold;
+            font-size: 14px;
+            border-radius: 30px;
+        }
+
+        @media (max-width: 991px) {
+            .side-widget {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header-section">
+        <div class="container">
+            <div class="row mb-2">
+                <div class="col-12">
+                    <div class="header-buttons d-flex align-items-center justify-content-end gap-2">
+                        <a href="02_LogIn.html" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-sign-in-alt"></i> 로그인
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-user-plus"></i> 회원가입
+                        </a>
+                        <div class="btn-divider"></div>
+                        <a href="05_Selling.html" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-store"></i> 판매
+                        </a>
+                        <a href="07_MyShop.html" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-user-cog"></i> 내 상점
+                        </a>
+                        <a href="03_Cart.html" class="btn btn-warning btn-sm position-relative">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="badge-notification">3</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-4 col-6">
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-store"></i> ShopMall
+                    </a>
+                </div>
+
+                <div class="col-lg-9 col-md-8 col-6">
+                    <div class="search-container">
+                        <input type="text" class="form-control search-input" placeholder="상품을 검색해보세요...">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-trophy"></i> 랭킹</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-star"></i> 추천</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-fire"></i> 인기</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-tags"></i> 이벤트</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="animate-fade-in">
+            <h2 class="text-center mb-4" style="margin-top: 50px;">굿즈</h2>
+            <div class="category-grid">
+                <a href="06_Buying.html" class="category-card">
+                    <div class="category-image">
+                        <img src="img/06_굿즈/01_굿즈_캐릭터문구 카카오프렌즈 일자 필통 1개 리본 네오.png" alt="톰브 스커트트">
+                    </div>
+                    <div class="category-title">캐릭터문구 카카오프렌즈 일자 필통 1개 리본 네오</div>
+                </a>
+
+                <a href="#" class="category-card">
+                    <div class="category-image">
+                        <img src="img/06_굿즈/02_굿즈_포켓몬스터 이브이 캐릭터 봉제 인형 45cm.png" alt="톰브 스커트트">
+                    </div>
+                    <div class="category-title">포켓몬스터 이브이 캐릭터 봉제 인형 45cm</div>
+                </a>
+
+                <a href="#" class="category-card">
+                    <div class="category-image">
+                        <img src="img/06_굿즈/03_굿즈_산리오 헬로 키티 미니 마스코트 홀더.png" alt="톰브 스커트트">
+                    </div>
+                    <div class="category-title">산리오 헬로 키티 미니 마스코트 홀더</div>
+                </a>
+
+                <a href="#" class="category-card">
+                    <div class="category-image">
+                        <img src="img/06_굿즈/04_굿즈_BTS X DM4 에코백.png" alt="톰브 스커트트">
+                    </div>
+                    <div class="category-title">BTS X DM4 에코백</div>
+                </a>
+
+                <a href="#" class="category-card">
+                    <div class="category-image">
+                        <img src="img/06_굿즈/05_굿즈_고양이 캣타워(큐티캣+사다리).png" alt="톰브 스커트트">
+                    </div>
+                    <div class="category-title">고양이 캣타워(큐티캣+사다리)</div>
+                </a>
+
+                <a href="#" class="category-card">
+                    <div class="category-image">
+                        <img src="img/06_굿즈/06_굿즈_반소매 크롭티 1장부터 주문제작 커스텀 단체 굿즈 판촉물 기념품.png" alt="톰브 스커트트">
+                    </div>
+                    <div class="category-title">반소매 크롭티 1장부터 주문제작 커스텀 단체 굿즈 판촉물 기념품</div>
+                </a>
+
+                <a href="#" class="category-card">
+                    <div class="category-image">
+                        <img src="img/06_굿즈/07_굿즈_B612 행성에 놀러 간 슈뢰딩거 고양이 티셔츠 아이보리 과학 굿즈 오버핏 반팔 남녀공용.png" alt="톰브 스커트트">
+                    </div>
+                    <div class="category-title">B612 행성에 놀러 간 슈뢰딩거 고양이 티셔츠 아이보리 과학 굿즈 오버핏 반팔 남녀공용</div>
+                </a>
+
+                <a href="#" class="category-card">
+                    <div class="category-image">
+                        <img src="img/06_굿즈/08_굿즈_LED 키캡 키링 화이트 (2구) 1장부터 주문제작 커스텀 단체 굿즈 판촉물 기념품.png" alt="톰브 스커트트">
+                    </div>
+                    <div class="category-title">LED 키캡 키링 화이트 (2구) 1장부터 주문제작 커스텀 단체 굿즈 판촉물 기념품</div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h5>회사 정보</h5>
+                    <p>ShopMall은 고객 만족을 최우선으로 하는 온라인 쇼핑몰입니다.</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 서울특별시 강남구 테헤란로 123</p>
+                    <p><i class="fas fa-phone"></i> 1588-1234</p>
+                    <p><i class="fas fa-envelope"></i> info@shopmall.co.kr</p>
+                </div>
+
+                <div>
+                    <h5>고객 서비스</h5>
+                    <p><a href="#">자주 묻는 질문</a></p>
+                    <p><a href="#">배송 안내</a></p>
+                    <p><a href="#">교환/반품</a></p>
+                    <p><a href="#">이용약관</a></p>
+                    <p><a href="#">개인정보처리방침</a></p>
+                </div>
+
+                <div>
+                    <h5>쇼핑 가이드</h5>
+                    <p><a href="#">구매 가이드</a></p>
+                    <p><a href="#">결제 방법</a></p>
+                    <p><a href="#">적립금 안내</a></p>
+                    <p><a href="#">쿠폰 사용법</a></p>
+                </div>
+
+                <div>
+                    <h5>소셜 미디어</h5>
+                    <p>ShopMall과 함께하세요!</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <hr style="border-color: #34495e;">
+            <div class="text-center">
+                <p>&copy; 2025 ShopMall. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="side-widget">
+        <div class="widget-box">
+            <a href="09_ChatBot.html" style="text-decoration: none; color: inherit;">
+                <div class="title">문의</div>
+                <div class="content recent">
+                    <i class="fas fa-comments"></i><br />
+                    <span>채팅상담 바로가기</span>
+                </div>
+            </a>
+        </div>
+        <div class="widget-box top-btn" onclick="scrollToTop()">
+            TOP
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="js/MainIndex.js"></script>
+</body>
+
+</html>

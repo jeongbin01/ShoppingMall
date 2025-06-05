@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopMall - 온라인 쇼핑몰</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/ShopMallAll.css" />
+</head>
+
+<body>
+    <header class="header-section">
+        <div class="container">
+            <div class="row mb-2">
+                <div class="col-12">
+                    <div class="header-buttons d-flex align-items-center justify-content-end gap-2">
+                        <a href="02_LogIn.html" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-sign-in-alt"></i> 로그인
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-user-plus"></i> 회원가입
+                        </a>
+                        <div class="btn-divider"></div>
+                        <a href="05_Selling.html" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-store"></i> 판매
+                        </a>
+                        <a href="07_MyShop.html" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-user-cog"></i> 내 상점
+                        </a>
+                        <a href="03_Cart.html" class="btn btn-warning btn-sm position-relative">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="badge-notification">3</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-4 col-6">
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-store"></i> ShopMall
+                    </a>
+                </div>
+
+                <div class="col-lg-9 col-md-8 col-6">
+                    <div class="search-container">
+                        <input type="text" class="form-control search-input" placeholder="상품을 검색해보세요...">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-trophy"></i> 랭킹</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-star"></i> 추천</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-fire"></i> 인기</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-tags"></i> 이벤트</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="product-slide animate-fade-in">
+            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="0"
+                        class="active"></button>
+                    <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="2"></button>
+                </div>
+
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="carousel-overlay">
+                            <div class="carousel-content">
+                                <h2>신상품 특가 세일</h2>
+                                <p>최대 70% 할인된 가격으로 만나보세요</p>
+                                <button class="btn btn-warning btn-lg">지금 쇼핑하기</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item"
+                        style="background-image: url('https://via.placeholder.com/1200x500/ADD8E6/FFFFFF?text=Brand+Collection');">
+                        <div class="carousel-overlay">
+                            <div class="carousel-content">
+                                <h2>브랜드 컬렉션</h2>
+                                <p>유명 브랜드 제품을 한 곳에서</p>
+                                <button class="btn btn-warning btn-lg">컬렉션 보기</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item"
+                        style="background-image: url('https://via.placeholder.com/1200x500/90EE90/FFFFFF?text=Free+Shipping');">
+                        <div class="carousel-overlay">
+                            <div class="carousel-content">
+                                <h2>무료배송 이벤트</h2>
+                                <p>5만원 이상 구매시 무료배송</p>
+                                <button class="btn btn-warning btn-lg">이벤트 참여</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+        </section>
+
+        <section class="animate-fade-in">
+            <h2 class="text-center mb-4">카테고리</h2>
+            <div class="category-grid">
+                <a href="04_CategoryPage_01Men.html" class="category-card">
+                    <div class="category-image">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <div class="category-title">남자패션</div>
+                </a>
+
+                <a href="04_CategoryPage_02Woman.html" class="category-card">
+                    <div class="category-image">
+                        <i class="fas fa-female"></i>
+                    </div>
+                    <div class="category-title">여자패션</div>
+                </a>
+
+                <a href="04_CategoryPage_03Shoes.html" class="category-card">
+                    <div class="category-image">
+                        <i class="fas fa-shoe-prints"></i>
+                    </div>
+                    <div class="category-title">신발</div>
+                </a>
+
+                <a href="04_CategoryPage_04Accessories.html" class="category-card">
+                    <div class="category-image">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <div class="category-title">악세사리</div>
+                </a>
+
+                <a href="04_CategoryPage_05Electronics.html" class="category-card">
+                    <div class="category-image">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <div class="category-title">전자기기</div>
+                </a>
+
+                <a href="04_CategoryPage_06Merch.html" class="category-card">
+                    <div class="category-image">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <div class="category-title">굿즈</div>
+                </a>
+
+                <a href="04_CategoryPage_07Bags & Wallets.html" class="category-card">
+                    <div class="category-image">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <div class="category-title">가방/지갑</div>
+                </a>
+
+                <a href="04_CategoryPage_08Others.html" class="category-card">
+                    <div class="category-image">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                    <div class="category-title">기타</div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h5>회사 정보</h5>
+                    <p>ShopMall은 고객 만족을 최우선으로 하는 온라인 쇼핑몰입니다.</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 서울특별시 강남구 테헤란로 123</p>
+                    <p><i class="fas fa-phone"></i> 1588-1234</p>
+                    <p><i class="fas fa-envelope"></i> info@shopmall.co.kr</p>
+                </div>
+
+                <div>
+                    <h5>고객 서비스</h5>
+                    <p><a href="#">자주 묻는 질문</a></p>
+                    <p><a href="#">배송 안내</a></p>
+                    <p><a href="#">교환/반품</a></p>
+                    <p><a href="#">이용약관</a></p>
+                    <p><a href="#">개인정보처리방침</a></p>
+                </div>
+
+                <div>
+                    <h5>쇼핑 가이드</h5>
+                    <p><a href="#">구매 가이드</a></p>
+                    <p><a href="#">결제 방법</a></p>
+                    <p><a href="#">적립금 안내</a></p>
+                    <p><a href="#">쿠폰 사용법</a></p>
+                </div>
+
+                <div>
+                    <h5>소셜 미디어</h5>
+                    <p>ShopMall과 함께하세요!</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <hr style="border-color: #34495e;">
+            <div class="text-center">
+                <p>&copy; 2025 ShopMall. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="side-widget">
+        <div class="widget-box">
+            <a href="09_ChatBot.html" style="text-decoration: none; color: inherit;">
+                <div class="title">문의</div>
+                <div class="content recent">
+                    <i class="fas fa-comments"></i><br />
+                    <span>채팅상담 바로가기</span>
+                </div>
+            </a>
+        </div>
+        <div class="widget-box top-btn" onclick="scrollToTop()">
+            TOP
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="js/MainIndex.js"></script>
+</body>
+
+</html>

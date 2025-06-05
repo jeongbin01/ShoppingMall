@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopMall - 온라인 쇼핑몰</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #28a745;
+            --secondary-color: #ffc107;
+            --accent-color: #17a2b8;
+        }
+
+        /* ================================
+   ★ 기본 리셋 및 폰트 설정
+   ================================= */
+:root {
+    --primary-color: #28a745;
+    --secondary-color: #ffc107;
+    --accent-color: #17a2b8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    /* font-family: 'Noto Sans KR', sans-serif; */
+    background-color: #ececec;
+    /* 본문 회색 통일 */
+    color: #333;
+}
+
+/* 링크 기본 스타일 제거 */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 버튼 기본 스타일 */
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-family: inherit;
+}
+
+/* 취소/다음 버튼 색상 다르게 */
+.btn-cancel {
+    background-color: #777;
+}
+
+.btn-cancel:hover {
+    background-color: #555;
+}
+
+.btn-next {
+    background-color: #2196f3;
+}
+
+.btn-next:hover {
+    background-color: #1976d2;
+}
+
+/* ================================
+   CSS 변수 선언
+   ================================= */
+/* :root { */
+    /* --header-bg-color: #4a4a4a; */
+    /* 헤더 배경색 (진한 회색) */
+    /* --header-text-color: #ffffff; */
+    /* 헤더 텍스트(링크/로고) 색상 */
+    /* --card-bg-color: #ffffff; */
+    /* 카드(메인) 배경색 */
+    /* --main-bg-color: #ececec; */
+    /* 본문 배경색 */
+    /* --accent-color: #ff9800; */
+    /* 강조 색 (필요 시) */
+    /* --footer-bg-color: #4a4a4a; */
+    /* 푸터 배경색 */
+    /* --footer-text-color: #ffffff; */
+    /* 푸터 텍스트 색상 */
+/* } */
+
+/* ================================
+   1) Header 스타일
+   ================================= */
+
+/* 공통 Header 컨테이너 */
+.header {
+    width: 100%;
+    background-color: var(--header-bg-color);
+    /* Sticky 필요 시 아래 주석 해제 */
+    /* position: sticky; */
+    /* top: 0; z-index: 100; */
+}
+
+/* ─── 1단계 바: 상단 인증 링크 바 ─── */
+.header-top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    /* 인증 링크 우측 정렬 */
+    align-items: center;
+    /* 세로 중앙 정렬 */
+    padding: 8px 20px;
+    /* 상하 8px, 좌우 20px */
+    background-color: var(--header-bg-color);
+    font-size: 0.9rem;
+}
+
+.header-top-bar .auth-links a {
+    color: var(--header-text-color);
+    margin-left: 12px;
+    /* 링크 간 간격 */
+    transition: color 0.15s;
+}
+
+.header-top-bar .auth-links a:hover {
+    color: #ddd;
+    /* Hover 시 밝은 회색 */
+}
+
+/* ─── 2단계 바: 로고 + 검색창 + 햄버거 ─── */
+.header-search-bar {
+    position: relative;
+    /* 서브메뉴 absolute 위치 기준 */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* 좌-중-우 정렬 */
+    align-items: center;
+    /* 세로 중앙 정렬 */
+    padding: 12px 20px;
+    /* 상하 12px, 좌우 20px */
+    background-color: var(--header-bg-color);
+    gap: 16px;
+    /* 요소들 간 가로 간격 */
+}
+
+/* 2-1) 로고 영역 (좌측) */
+.header-search-bar .logo {
+    display: flex;
+    /* 수직 중앙 정렬을 위해 flex 사용 */
+    align-items: center;
+    margin-top: -2%;
+    /* 살짝 위로 조정 */
+}
+
+.header-search-bar .logo h1 {
+    font-size: 1.5rem;
+    /* 로고 크기 */
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--header-text-color);
+    /* 흰색 로고 텍스트 */
+    margin: 0;
+    line-height: 1;
+}
+
+/* 2-2) 검색창 전체 박스(가운데) */
+.header-search-bar .search-box {
+    display: flex;
+    align-items: center;
+    /* 세로 중앙 정렬 */
+    flex: 1;
+    /* 남은 가로를 모두 차지 */
+    max-width: 600px;
+    /* 최대 너비 제한 */
+    margin: 0 20px;
+    /* 좌우 여백 */
+    background-color: var(--card-bg-color);
+    border-radius: 4px;
+    overflow: hidden;
+    height: 40px;
+    /* 고정 높이 지정 */
+}
+
+.header-search-bar .search-box .search-input {
+    flex: 1;
+    padding: 0 12px;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    height: 100%;
+}
+
+.header-search-bar .search-box .search-input::placeholder {
+    color: #aaa;
+}
+
+.header-search-bar .search-box .search-btn {
+    background-color: #ffffff;
+    color: #333;
+    padding: 0 12px;
+    font-size: 1rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ─── 2-3) 햄버거 버튼 (우측) ─── */
+.header-search-bar .hamburger-btn {
+    width: 44px;
+    height: 44px;
+    background-color: #ffffff;
+    /* 흰색 배경 */
+    color: #000000;
+    /* 검정 아이콘 */
+    border: none;
+    /* 테두리 제거 */
+    border-radius: 4px;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    /* 가로 중앙 정렬 */
+    align-items: flex-start;
+    /* 세로는 위쪽으로 밀어 올림 */
+    transition: background-color 0.2s ease;
+}
+
+.header-search-bar .hamburger-btn:hover {
+    background-color: #f2f2f2;
+    /* Hover 시 연한 회색 */
+}
+
+/* ─── 2-4) 서브메뉴 (햄버거 클릭 시 나타남) ─── */
+.submenu {
+    display: none;
+    /* 기본적으로 숨김 */
+    position: absolute;
+    /* header-search-bar 기준 */
+    top: 100%;
+    /* 햄버거 바로 밑에 나타나도록 */
+    right: 20px;
+    /* 우측 패딩과 동일 */
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+    /* 최상단 레이어 */
+}
+
+.submenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+}
+
+.submenu ul li {
+    padding: 8px 16px;
+    white-space: nowrap;
+}
+
+.submenu ul li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.submenu ul li:hover {
+    background-color: #f2f2f2;
+}
+
+/* ================================
+   2) Main (Selling System) 스타일
+   ================================= */
+.main-content {
+    background-color: var(--main-bg-color);
+    padding: 30px 20px;
+    height: 110%;
+}
+
+/* 판매 컨테이너: 좌우 2열 레이아웃 */
+.sell-container {
+    display: flex;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: var(--card-bg-color);
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* ── 좌측 박스: 이미지 업로드 ── */
+.left-box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-upload-box {
+    width: 100%;
+    max-width: 350px;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+}
+
+.image-upload-box label {
+    display: block;
+    margin-bottom: 12px;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.image-upload-box .sub {
+    display: block;
+    font-size: 0.8rem;
+    color: #777;
+    margin-top: 4px;
+}
+
+.image-upload-box input[type="file"] {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+/* 이미지 미리보기 영역 */
+.preview-placeholder {
+    width: 100%;
+    height: 250px;
+    background-color: #eee;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #999;
+    font-size: 0.9rem;
+}
+
+/* ── 우측 박스: 입력 폼 ── */
+.right-box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.form-box {
+    width: 100%;
+    max-width: 350px;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 16px;
+}
+
+/* 각 입력 라벨 */
+.form-box label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+/* 텍스트/넘버 입력필드 */
+.form-box input[type="text"],
+.form-box input[type="number"],
+.form-box select,
+.form-box textarea {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 0.95rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+/* select 높이 맞추기 */
+.form-box select {
+    height: 38px;
+}
+
+/* textarea (상세설명) */
+.form-box textarea {
+    height: 120px;
+    resize: vertical;
+    margin-bottom: 12px;
+}
+
+/* 버튼 행 */
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
+/* ================================
+   3) Footer (화면 하단 고정)
+   ================================= */
+/* 푸터 스타일 */
+.footer-section {
+    background: #2c3e50;
+    color: white;
+    padding: 40px 0;
+    margin-top: 60px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-section h5 {
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.footer-section p,
+.footer-section a {
+    color: #ecf0f1;
+    text-decoration: none;
+    line-height: 1.8;
+}
+
+.footer-section a:hover {
+    color: var(--secondary-color);
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-icons a {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+/* .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--footer-bg-color);
+    color: var(--footer-text-color);
+    padding: 20px 0;
+    z-index: 1000;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-container p {
+    font-size: 0.9rem;
+    margin: 4px 0;
+} */
+
+/* ================================
+   4) 반응형 예시 (너비 768px 이하)
+   ================================= */
+@media (max-width: 768px) {
+    .sell-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left-box,
+    .right-box {
+        width: 100%;
+    }
+
+    .form-box,
+    .image-upload-box {
+        max-width: 100%;
+    }
+
+    .header-search-bar .search-box {
+        width: 80%;
+    }
+
+    .header-search-bar .hamburger-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        padding-top: 4px;
+    }
+
+    /* 서브메뉴도 모바일에서 전체 너비로 */
+    .submenu {
+        right: 0;
+        left: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .submenu ul li {
+        text-align: center;
+    }
+}
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            color: white;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            border-radius: 25px;
+            padding: 12px 50px 12px 20px;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--secondary-color);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: #e0a800;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .header-buttons .btn {
+            border-radius: 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 0.85rem;
+            padding: 8px 15px;
+        }
+
+        .header-buttons .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+        }
+
+        .btn-divider {
+            width: 1px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 0 5px;
+        }
+
+        .btn-outline-light:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+
+        .navbar-nav .nav-link {
+            color: #333;
+            font-weight: 500;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .navbar-toggler {
+            border: 2px solid #333;
+            padding: 4px 8px;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        .footer-section {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h5 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ecf0f1;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary-color);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .badge-notification {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 10px 0;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .search-input {
+                font-size: 14px;
+                padding: 10px 45px 10px 15px;
+            }
+
+            .header-buttons {
+                flex-wrap: wrap;
+                gap: 5px !important;
+            }
+
+            .header-buttons .btn {
+                font-size: 0.7rem;
+                padding: 4px 8px;
+            }
+
+            .btn-divider {
+                display: none;
+            }
+
+            .carousel-content h2 {
+                font-size: 2rem;
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .navbar-collapse {
+                display: flex !important;
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .side-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .widget-box {
+            width: 120px;
+            background: white;
+            border: 1px solid #ccc;
+            text-align: center;
+            font-size: 13px;
+            padding: 12px 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .widget-box:hover {
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .widget-box .title {
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .widget-box .content {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .widget-box.top-btn {
+            background: #f1f1f1;
+            font-weight: bold;
+            font-size: 14px;
+            border-radius: 30px;
+        }
+
+        @media (max-width: 991px) {
+            .side-widget {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header-section">
+        <div class="container">
+            <div class="row mb-2">
+                <div class="col-12">
+                    <div class="header-buttons d-flex align-items-center justify-content-end gap-2">
+                        <a href="02_Login.html" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-sign-in-alt"></i> 로그인
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-user-plus"></i> 회원가입
+                        </a>
+                        <div class="btn-divider"></div>
+                        <a href="05_Selling.html" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-store"></i> 판매
+                        </a>
+                        <a href="07_MyShop.html" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-user-cog"></i> 내 상점
+                        </a>
+                        <a href="03_Cart.html" class="btn btn-warning btn-sm position-relative">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="badge-notification">3</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-4 col-6">
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-store"></i> ShopMall
+                    </a>
+                </div>
+
+                <div class="col-lg-9 col-md-8 col-6">
+                    <div class="search-container">
+                        <input type="text" class="form-control search-input" placeholder="상품을 검색해보세요...">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-trophy"></i> 랭킹</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-star"></i> 추천</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-fire"></i> 인기</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-tags"></i> 이벤트</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <main class="main-content">
+            <div class="sell-container">
+                <!-- 좌: 이미지 등록 박스 -->
+                <div class="left-box">
+                    <div class="image-upload-box">
+                        <label for="product-image">Product_image<br><span class="sub">(이미지 등록)</span></label>
+                        <input type="file" id="product-image" accept="image/*" />
+                        <div class="preview-placeholder">
+                            <span>미리보기 영역</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 우: 입력 폼 박스 -->
+                <div class="right-box">
+                    <div class="form-box">
+                        <label for="product-name">Name</label>
+                        <input type="text" id="product-name" placeholder="상품명 입력" />
+
+                        <label for="product-price">Price</label>
+                        <input type="number" id="product-price" placeholder="가격 입력" />
+
+                        <label for="product-category">Category</label>
+                        <select id="product-category">
+                            <option value="">-- 카테고리 선택 --</option>
+                            <option value="men-fashion">남자패션</option>
+                            <option value="women-fashion">여자패션</option>
+                            <option value="shoes">신발</option>
+                            <option value="accessories">악세사리</option>
+                            <option value="electronics">전자기기</option>
+                            <option value="goods">굿즈</option>
+                            <option value="bags-wallets">가방/지갑</option>
+                            <option value="etc">기타</option>
+                        </select>
+
+
+                        <label for="product-info">Product info</label>
+                        <textarea id="product-info" placeholder="상품 상세 설명 입력"></textarea>
+
+                        <div class="button-row">
+                            <button id="cancel-btn" class="btn btn-cancel">Cancel</button>
+                            <button id="next-btn" class="btn btn-next">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h5>회사 정보</h5>
+                    <p>ShopMall은 고객 만족을 최우선으로 하는 온라인 쇼핑몰입니다.</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 서울특별시 강남구 테헤란로 123</p>
+                    <p><i class="fas fa-phone"></i> 1588-1234</p>
+                    <p><i class="fas fa-envelope"></i> info@shopmall.co.kr</p>
+                </div>
+
+                <div>
+                    <h5>고객 서비스</h5>
+                    <p><a href="#">자주 묻는 질문</a></p>
+                    <p><a href="#">배송 안내</a></p>
+                    <p><a href="#">교환/반품</a></p>
+                    <p><a href="#">이용약관</a></p>
+                    <p><a href="#">개인정보처리방침</a></p>
+                </div>
+
+                <div>
+                    <h5>쇼핑 가이드</h5>
+                    <p><a href="#">구매 가이드</a></p>
+                    <p><a href="#">결제 방법</a></p>
+                    <p><a href="#">적립금 안내</a></p>
+                    <p><a href="#">쿠폰 사용법</a></p>
+                </div>
+
+                <div>
+                    <h5>소셜 미디어</h5>
+                    <p>ShopMall과 함께하세요!</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <hr style="border-color: #34495e;">
+            <div class="text-center">
+                <p>&copy; 2025 ShopMall. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="side-widget">
+        <div class="widget-box">
+            <a href="09_ChatBot.html" style="text-decoration: none; color: inherit;">
+                <div class="title">문의</div>
+                <div class="content recent">
+                    <i class="fas fa-comments"></i><br />
+                    <span>채팅상담 바로가기</span>
+                </div>
+            </a>
+        </div>
+        <div class="widget-box top-btn" onclick="scrollToTop()">
+            TOP
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="js/MainIndex.js"></script>
+    <script src="js/sell.js"></script>
+</body>
+
+</html>

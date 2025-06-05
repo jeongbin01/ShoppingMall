@@ -1,0 +1,306 @@
+/* ===== 메인 콘텐츠 영역 ===== */
+.content_area {
+    flex: 1;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.content_title {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #333);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #28a745;
+    display: inline-block;
+}
+
+/* ===== 배송 박스 스타일 ===== */
+.delivery-box {
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.product-image {
+    max-width: 200px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.product-image:hover {
+    transform: scale(1.05);
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.product-quantity {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* ===== 배송 정보 박스 (녹색 테마) ===== */
+.shipping-info {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 25px 0;
+    border-left: 4px solid #28a745;
+    /* 녹색으로 변경 */
+}
+
+.shipping-info .info-item {
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.shipping-info .info-item:last-child {
+    margin-bottom: 0;
+}
+
+.shipping-info .info-label {
+    font-weight: 600;
+    color: #333;
+}
+
+.shipping-info .info-value {
+    color: #666;
+}
+
+/* ===== 타임라인 스타일 ===== */
+.timeline {
+    position: relative;
+    margin-left: 40px;
+    border-left: 4px solid #e9ecef;
+    padding-left: 0;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-item .icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+    color: #6c757d;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-left: -62px;
+    z-index: 2;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 3px solid white;
+}
+
+.timeline-item.active .icon {
+    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+    /* 활성 시 녹색 그라데이션 */
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+}
+
+.timeline-item .content {
+    margin-left: 25px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    flex: 1;
+    border: 1px solid #f1f3f4;
+    transition: all 0.3s ease;
+}
+
+.timeline-item.active .content {
+    border-color: #28a745;
+    /* 활성 시 테두리 녹색 */
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.15);
+}
+
+.timeline-item .title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.timeline-item.active .title {
+    color: #28a745;
+    /* 활성 시 텍스트 녹색 */
+}
+
+.timeline-item .date {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.timeline-item.active .date {
+    color: #28a745;
+    /* 활성 시 날짜 텍스트 녹색 */
+    font-weight: 500;
+}
+
+/* ===== 상태 배지 (녹색 그라데이션) ===== */
+.status-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 15px;
+    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+
+/* ===== 반응형 디자인 ===== */
+@media (max-width: 992px) {
+    .mypage-wrapper {
+        flex-direction: column;
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .snb_area {
+        flex: none;
+        position: static;
+    }
+
+    .content_area {
+        padding: 25px;
+    }
+
+    .delivery-box {
+        padding: 20px;
+    }
+
+    .product-image {
+        max-width: 150px;
+    }
+
+    .timeline {
+        margin-left: 30px;
+    }
+
+    .timeline-item .icon {
+        width: 40px;
+        height: 40px;
+        margin-left: -52px;
+        font-size: 16px;
+    }
+
+    .timeline-item .content {
+        padding: 15px;
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mypage-wrapper {
+        padding: 10px;
+    }
+
+    .content_area {
+        padding: 20px;
+    }
+
+    .delivery-box {
+        padding: 15px;
+    }
+
+    .product-image {
+        max-width: 120px;
+    }
+
+    .content_title h3 {
+        font-size: 1.5rem;
+    }
+
+    .timeline {
+        margin-left: 25px;
+    }
+
+    .timeline-item .icon {
+        width: 35px;
+        height: 35px;
+        margin-left: -47px;
+        font-size: 14px;
+    }
+
+    .timeline-item .content {
+        padding: 12px;
+        margin-left: 15px;
+    }
+
+    .timeline-item .title {
+        font-size: 1rem;
+    }
+}
+
+/* ===== 애니메이션 효과 ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.delivery-box {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.timeline-item {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.timeline-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.timeline-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.timeline-item:nth-child(3) {
+    animation-delay: 0.3s;
+}

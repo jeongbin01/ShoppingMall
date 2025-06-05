@@ -1,0 +1,491 @@
+
+/* ─────────────────────────────────────────────────────────────────
+   1) 검색창 - 돋보기 아이콘 위치 보정
+───────────────────────────────────────────────────────────────── */
+.search-box {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 8px 36px 8px 12px;
+    /* 오른쪽 여백(36px)으로 아이콘이 겹치지 않게 함 */
+    font-size: 0.95rem;
+    line-height: 1.4;
+    height: 36px;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    transition: border-color 0.2s ease;
+}
+
+.search-box input:focus {
+    border-color: #00c851;
+    outline: none;
+    box-shadow: 0 0 0 0.15rem rgba(0, 200, 81, 0.25);
+}
+
+.search-box .search-icon {
+    position: absolute;
+    top: 50%;
+    /* 세로 중앙 정렬 */
+    right: 12px;
+    /* 입력창 오른쪽 안쪽 여백 */
+    transform: translateY(-50%);
+    font-size: 0.9rem;
+    color: #999;
+    pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   2) CSV 버튼 색상 & 컨트롤 영역 정렬
+───────────────────────────────────────────────────────────────── */
+/* 컨트롤 영역 전체를 flex로 구성하고, 좌우 끝 정렬 */
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    justify-content: space-between;
+    /* 검색+필터는 왼쪽, CSV는 오른쪽 끝으로 */
+    background-color: #ffffff;
+    padding: 16px 24px;
+    border-radius: 4px;
+    border: 1px solid #ececec;
+    margin-bottom: 20px;
+}
+
+/* 검색창 오른쪽 여백 추가 */
+.controls .search-box {
+    margin-right: 12px;
+}
+
+/* 상태 필터 오른쪽 여백 추가 */
+.controls .filter-select {
+    margin-right: 16px;
+    min-width: 160px;
+}
+
+/* CSV 버튼 전용 색상 (KREAM 그린) */
+.btn-csv {
+    background-color: #00c851;
+    color: #ffffff;
+    border: none;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    /* 아이콘과 텍스트 사이 간격 */
+    transition: background-color 0.2s ease;
+}
+
+.btn-csv:hover {
+    background-color: #00a445;
+}
+
+/* csv-wrapper: CSV 버튼을 오른쪽 끝으로 밀기 위한 요소 */
+.csv-wrapper {
+    margin-left: auto;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   3) 테이블 영역 스타일 (KREAM 느낌)
+───────────────────────────────────────────────────────────────── */
+.table-responsive {
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: 1px solid #ececec;
+    overflow: hidden;
+}
+
+.table-kream {
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+.table-kream thead th {
+    padding: 12px 8px;
+    font-weight: 600;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #e9e9e9;
+    text-align: left;
+    white-space: nowrap;
+    cursor: pointer;
+    color: #333;
+}
+
+.table-kream thead th i {
+    margin-left: 6px;
+    font-size: 0.85rem;
+    color: #888;
+    transition: color 0.2s ease;
+}
+
+.table-kream thead th:hover {
+    background-color: #f0f0f0;
+}
+
+.table-kream thead th:hover i {
+    color: #333;
+}
+
+.table-kream tbody td {
+    padding: 10px 8px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+    color: #333;
+}
+
+.table-kream tbody tr:hover {
+    background-color: #fafafa;
+}
+
+.badge {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 12px;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   4) 모달 전체 레이어 (흑백 반투명 + 중앙 정렬)
+───────────────────────────────────────────────────────────────── */
+#orderModal {
+    display: none;
+    /* 기본적으로 숨김 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    /* 짙은 반투명 블랙 배경 */
+    z-index: 1050;
+    /* 다른 콘텐츠 위 */
+    padding: 16px;
+    /* 모바일 여백 확보 */
+    box-sizing: border-box;
+    overflow-y: auto;
+    /* 화면이 작아질 때 내부 스크롤 */
+}
+
+/* .show 클래스가 붙으면 flex 레이아웃으로 전환하여 중앙 정렬 */
+#orderModal.show {
+    display: flex;
+    align-items: center;
+    /* 세로 중앙 정렬 */
+    justify-content: center;
+    /* 가로 중앙 정렬 */
+}
+
+/* 모달 콘텐츠 컨테이너 */
+#orderModal .modal-content {
+    background: transparent;
+    border: none;
+    outline: none;
+    position: relative;
+    animation: modalFadeIn 0.25s ease-out;
+    width: 100%;
+    max-width: 600px;
+    /* 모달 최대 폭 제한 */
+    margin: auto;
+    /* 추가 중앙 정렬 보장 */
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   5) 영수증 래퍼 (스크롤 가능 & 중앙 정렬 보조)
+───────────────────────────────────────────────────────────────── */
+.receipt-wrapper {
+    width: 100%;
+    max-height: 90vh;
+    /* 화면 높이 대비 90% 이내 */
+    overflow-y: auto;
+    /* 내부 내용이 길어지면 스크롤 */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    /* 가로 중앙 정렬 */
+    align-items: flex-start;
+    /* 세로는 상단 정렬 */
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   6) 영수증 카드 (화이트 카드 + 그림자 + 라운드)
+───────────────────────────────────────────────────────────────── */
+.receipt-card {
+    background-color: #ffffff;
+    border-radius: 6px;
+    /* 부드러운 모서리 */
+    border: 1px solid #ececec;
+    /* 옅은 회색 테두리 */
+    padding: 24px 20px;
+    /* 카드 내부 여백 */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 480px;
+    /* 영수증 카드 자체의 최대 폭 */
+    margin: 0 auto;
+    /* 중앙 정렬 */
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   7) 영수증 헤더 영역 (가독성 있는 타이포)
+───────────────────────────────────────────────────────────────── */
+.receipt-header .store-name {
+    font-size: 1.6rem;
+    /* 큼직한 글씨 */
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.receipt-header .store-info {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.4;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.receipt-header hr {
+    border: none;
+    border-top: 1px solid #e9e9e9;
+    margin: 20px 0;
+    /* 상하 여백 늘려서 구분감 강화 */
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   8) 주문 기본 정보 영역 (주문번호/결제일시/결제수단/고객명)
+───────────────────────────────────────────────────────────────── */
+.receipt-order-info .row {
+    margin-bottom: 12px;
+}
+
+.receipt-order-info .small.text-muted {
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.receipt-order-info .fw-semibold {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.receipt-order-info .row+.row {
+    margin-top: 8px;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   9) 상품 리스트 테이블 (경계·배경·폰트)
+───────────────────────────────────────────────────────────────── */
+.receipt-items {
+    margin-top: 20px;
+    /* 여백을 살짝 늘려서 구분감 강화 */
+}
+
+.receipt-items table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+}
+
+.receipt-items thead th {
+    background-color: #f7f7f7;
+    /* 옅은 회색 헤더 */
+    padding: 10px 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #e9e9e9;
+    color: #333;
+}
+
+.receipt-items tbody td {
+    padding: 8px 8px;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #f0f0f0;
+    color: #333;
+}
+
+.receipt-items .text-center {
+    text-align: center;
+}
+
+.receipt-items .text-end {
+    text-align: right;
+}
+
+.receipt-items tfoot td {
+    font-weight: 600;
+    background-color: #f7f7f7;
+    border-top: 1px solid #e9e9e9;
+    padding: 10px 8px;
+    color: #333;
+}
+
+.receipt-items tfoot td.text-end {
+    padding-right: 8px;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   10) 금액 요약 영역 (부가세/공급가액/총액 강조)
+───────────────────────────────────────────────────────────────── */
+.receipt-summary {
+    margin-bottom: 20px;
+}
+
+.receipt-summary .row {
+    margin-bottom: 8px;
+}
+
+.receipt-summary .small.text-muted {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.receipt-summary .fw-semibold {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.receipt-summary hr {
+    border: none;
+    border-top: 1px solid #e9e9e9;
+    margin: 12px 0;
+}
+
+.receipt-summary .final-amount {
+    background-color: #fafafa;
+    /* 아주 옅은 회색 */
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #dcdcdc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.receipt-summary .final-amount .fw-bold {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #222;
+}
+
+.receipt-summary .final-amount .fs-5 {
+    font-size: 1.3rem;
+    color: #00c851;
+    /* KREAM 그린 강조 */
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   11) 하단 감사 문구 + 닫기 버튼
+───────────────────────────────────────────────────────────────── */
+.receipt-footer {
+    text-align: center;
+    margin-top: 24px;
+    /* 여백을 늘려서 버튼과 본문 구분 강화 */
+}
+
+.receipt-footer .thanks-message {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.4;
+    margin-bottom: 16px;
+}
+
+#modalCloseBtnFooter {
+    min-width: 100px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #555;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+#modalCloseBtnFooter:hover {
+    background-color: #f7f7f7;
+    border-color: #c8c8c8;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   12) 반응형 디자인 (모바일 & 태블릿)
+───────────────────────────────────────────────────────────────── */
+@media (max-width: 991.98px) {
+
+    /* 모바일에서 모달이 가로 넘치지 않도록 padding 축소 */
+    #orderModal {
+        padding: 8px;
+    }
+
+    #orderModal .modal-content {
+        max-width: 100%;
+    }
+
+    .receipt-card {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .receipt-card {
+        padding: 16px 12px;
+        max-width: 100%;
+    }
+
+    .receipt-header .store-name {
+        font-size: 1.4rem;
+    }
+
+    .receipt-header .store-info {
+        font-size: 0.75rem;
+    }
+
+    .receipt-items thead th {
+        padding: 8px 6px;
+        font-size: 0.85rem;
+    }
+
+    .receipt-items tbody td {
+        padding: 6px 6px;
+        font-size: 0.85rem;
+    }
+
+    .receipt-summary .small.text-muted {
+        font-size: 0.75rem;
+    }
+
+    .receipt-summary .final-amount .fw-bold {
+        font-size: 1rem;
+    }
+
+    .receipt-summary .final-amount .fs-5 {
+        font-size: 1.2rem;
+    }
+
+    #modalCloseBtnFooter {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+}

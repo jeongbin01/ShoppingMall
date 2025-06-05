@@ -1,0 +1,524 @@
+/* ================================
+   ★ 기본 리셋 및 폰트 설정
+   ================================= */
+:root {
+    --primary-color: #28a745;
+    --secondary-color: #ffc107;
+    --accent-color: #17a2b8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    /* font-family: 'Noto Sans KR', sans-serif; */
+    background-color: #ececec;
+    /* 본문 회색 통일 */
+    color: #333;
+}
+
+/* 링크 기본 스타일 제거 */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 버튼 기본 스타일 */
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-family: inherit;
+}
+
+/* 공통 .btn 클래스 */
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+/* 취소/다음 버튼 색상 다르게 */
+.btn-cancel {
+    background-color: #777;
+}
+
+.btn-cancel:hover {
+    background-color: #555;
+}
+
+.btn-next {
+    background-color: #2196f3;
+}
+
+.btn-next:hover {
+    background-color: #1976d2;
+}
+
+/* ================================
+   CSS 변수 선언
+   ================================= */
+/* :root { */
+    /* --header-bg-color: #4a4a4a; */
+    /* 헤더 배경색 (진한 회색) */
+    /* --header-text-color: #ffffff; */
+    /* 헤더 텍스트(링크/로고) 색상 */
+    /* --card-bg-color: #ffffff; */
+    /* 카드(메인) 배경색 */
+    /* --main-bg-color: #ececec; */
+    /* 본문 배경색 */
+    /* --accent-color: #ff9800; */
+    /* 강조 색 (필요 시) */
+    /* --footer-bg-color: #4a4a4a; */
+    /* 푸터 배경색 */
+    /* --footer-text-color: #ffffff; */
+    /* 푸터 텍스트 색상 */
+/* } */
+
+/* ================================
+   1) Header 스타일
+   ================================= */
+
+/* 공통 Header 컨테이너 */
+.header {
+    width: 100%;
+    background-color: var(--header-bg-color);
+    /* Sticky 필요 시 아래 주석 해제 */
+    /* position: sticky; */
+    /* top: 0; z-index: 100; */
+}
+
+/* ─── 1단계 바: 상단 인증 링크 바 ─── */
+.header-top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    /* 인증 링크 우측 정렬 */
+    align-items: center;
+    /* 세로 중앙 정렬 */
+    padding: 8px 20px;
+    /* 상하 8px, 좌우 20px */
+    background-color: var(--header-bg-color);
+    font-size: 0.9rem;
+}
+
+.header-top-bar .auth-links a {
+    color: var(--header-text-color);
+    margin-left: 12px;
+    /* 링크 간 간격 */
+    transition: color 0.15s;
+}
+
+.header-top-bar .auth-links a:hover {
+    color: #ddd;
+    /* Hover 시 밝은 회색 */
+}
+
+/* ─── 2단계 바: 로고 + 검색창 + 햄버거 ─── */
+.header-search-bar {
+    position: relative;
+    /* 서브메뉴 absolute 위치 기준 */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* 좌-중-우 정렬 */
+    align-items: center;
+    /* 세로 중앙 정렬 */
+    padding: 12px 20px;
+    /* 상하 12px, 좌우 20px */
+    background-color: var(--header-bg-color);
+    gap: 16px;
+    /* 요소들 간 가로 간격 */
+}
+
+/* 2-1) 로고 영역 (좌측) */
+.header-search-bar .logo {
+    display: flex;
+    /* 수직 중앙 정렬을 위해 flex 사용 */
+    align-items: center;
+    margin-top: -2%;
+    /* 살짝 위로 조정 */
+}
+
+.header-search-bar .logo h1 {
+    font-size: 1.5rem;
+    /* 로고 크기 */
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--header-text-color);
+    /* 흰색 로고 텍스트 */
+    margin: 0;
+    line-height: 1;
+}
+
+/* 2-2) 검색창 전체 박스(가운데) */
+.header-search-bar .search-box {
+    display: flex;
+    align-items: center;
+    /* 세로 중앙 정렬 */
+    flex: 1;
+    /* 남은 가로를 모두 차지 */
+    max-width: 600px;
+    /* 최대 너비 제한 */
+    margin: 0 20px;
+    /* 좌우 여백 */
+    background-color: var(--card-bg-color);
+    border-radius: 4px;
+    overflow: hidden;
+    height: 40px;
+    /* 고정 높이 지정 */
+}
+
+.header-search-bar .search-box .search-input {
+    flex: 1;
+    padding: 0 12px;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    height: 100%;
+}
+
+.header-search-bar .search-box .search-input::placeholder {
+    color: #aaa;
+}
+
+.header-search-bar .search-box .search-btn {
+    background-color: #ffffff;
+    color: #333;
+    padding: 0 12px;
+    font-size: 1rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ─── 2-3) 햄버거 버튼 (우측) ─── */
+.header-search-bar .hamburger-btn {
+    width: 44px;
+    height: 44px;
+    background-color: #ffffff;
+    /* 흰색 배경 */
+    color: #000000;
+    /* 검정 아이콘 */
+    border: none;
+    /* 테두리 제거 */
+    border-radius: 4px;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    /* 가로 중앙 정렬 */
+    align-items: flex-start;
+    /* 세로는 위쪽으로 밀어 올림 */
+    transition: background-color 0.2s ease;
+}
+
+.header-search-bar .hamburger-btn:hover {
+    background-color: #f2f2f2;
+    /* Hover 시 연한 회색 */
+}
+
+/* ─── 2-4) 서브메뉴 (햄버거 클릭 시 나타남) ─── */
+.submenu {
+    display: none;
+    /* 기본적으로 숨김 */
+    position: absolute;
+    /* header-search-bar 기준 */
+    top: 100%;
+    /* 햄버거 바로 밑에 나타나도록 */
+    right: 20px;
+    /* 우측 패딩과 동일 */
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+    /* 최상단 레이어 */
+}
+
+.submenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+}
+
+.submenu ul li {
+    padding: 8px 16px;
+    white-space: nowrap;
+}
+
+.submenu ul li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.submenu ul li:hover {
+    background-color: #f2f2f2;
+}
+
+/* ================================
+   2) Main (Selling System) 스타일
+   ================================= */
+.main-content {
+    background-color: var(--main-bg-color);
+    padding: 30px 20px;
+    height: 110%;
+}
+
+/* 판매 컨테이너: 좌우 2열 레이아웃 */
+.sell-container {
+    display: flex;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: var(--card-bg-color);
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* ── 좌측 박스: 이미지 업로드 ── */
+.left-box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-upload-box {
+    width: 100%;
+    max-width: 350px;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+}
+
+.image-upload-box label {
+    display: block;
+    margin-bottom: 12px;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.image-upload-box .sub {
+    display: block;
+    font-size: 0.8rem;
+    color: #777;
+    margin-top: 4px;
+}
+
+.image-upload-box input[type="file"] {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+/* 이미지 미리보기 영역 */
+.preview-placeholder {
+    width: 100%;
+    height: 250px;
+    background-color: #eee;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #999;
+    font-size: 0.9rem;
+}
+
+/* ── 우측 박스: 입력 폼 ── */
+.right-box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.form-box {
+    width: 100%;
+    max-width: 350px;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 16px;
+}
+
+/* 각 입력 라벨 */
+.form-box label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+/* 텍스트/넘버 입력필드 */
+.form-box input[type="text"],
+.form-box input[type="number"],
+.form-box select,
+.form-box textarea {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 0.95rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+/* select 높이 맞추기 */
+.form-box select {
+    height: 38px;
+}
+
+/* textarea (상세설명) */
+.form-box textarea {
+    height: 120px;
+    resize: vertical;
+    margin-bottom: 12px;
+}
+
+/* 버튼 행 */
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
+/* ================================
+   3) Footer (화면 하단 고정)
+   ================================= */
+/* 푸터 스타일 */
+.footer-section {
+    background: #2c3e50;
+    color: white;
+    padding: 40px 0;
+    margin-top: 60px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-section h5 {
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.footer-section p,
+.footer-section a {
+    color: #ecf0f1;
+    text-decoration: none;
+    line-height: 1.8;
+}
+
+.footer-section a:hover {
+    color: var(--secondary-color);
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-icons a {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+/* .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--footer-bg-color);
+    color: var(--footer-text-color);
+    padding: 20px 0;
+    z-index: 1000;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-container p {
+    font-size: 0.9rem;
+    margin: 4px 0;
+} */
+
+/* ================================
+   4) 반응형 예시 (너비 768px 이하)
+   ================================= */
+@media (max-width: 768px) {
+    .sell-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left-box,
+    .right-box {
+        width: 100%;
+    }
+
+    .form-box,
+    .image-upload-box {
+        max-width: 100%;
+    }
+
+    .header-search-bar .search-box {
+        width: 80%;
+    }
+
+    .header-search-bar .hamburger-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        padding-top: 4px;
+    }
+
+    /* 서브메뉴도 모바일에서 전체 너비로 */
+    .submenu {
+        right: 0;
+        left: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .submenu ul li {
+        text-align: center;
+    }
+}

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인 - ShopMall</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- FontAwesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/ShopMallAll.css" />
+    <link rel="stylesheet" href="css/login.css" />
+</head>
+
+<body>
+    <!-- ========== HEADER ========== -->
+    <header class="header-section">
+        <div class="container d-flex align-items-center justify-content-between">
+            <!-- 1) Logo 영역 -->
+            <a href="index.html" class="logo d-flex align-items-center">
+                <i class="fas fa-store"></i>
+                <span class="ms-2">ShopMall</span>
+            </a>
+
+            <!-- 2) 버튼 그룹 영역 -->
+            <div class="header-buttons d-flex align-items-center gap-3">
+                <a href="02_LogIn.html" class="btn btn-outline-light btn-sm">
+                    <i class="fas fa-sign-in-alt"></i> 로그인
+                </a>
+                <a href="#" class="btn btn-outline-light btn-sm">
+                    <i class="fas fa-user-plus"></i> 회원가입
+                </a>
+
+                <!-- 구분선 -->
+                <div class="btn-divider"></div>
+
+                <a href="05_Selling.html" class="btn btn-outline-light btn-sm">
+                    <i class="fas fa-store"></i> 판매
+                </a>
+                <a href="07_MyShop.html" class="btn btn-outline-light btn-sm">
+                    <i class="fas fa-user-cog"></i> 내 상점
+                </a>
+
+                <!-- 장바구니 -->
+                <a href="03_Cart.html" class="btn btn-warning btn-sm position-relative">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge-notification">3</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== LOGIN FORM ========== -->
+    <div class="login-container">
+        <div class="login-card">
+            <h1 class="login-title">
+                로그인
+                <span class="blind">ShopMall 로그인 페이지</span>
+            </h1>
+
+            <form id="loginForm" novalidate>
+                <!-- 이메일 입력 -->
+                <div class="input-box">
+                    <label for="emailInput" class="input-title">이메일</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="bi bi-envelope"></i>
+                        </span>
+                        <input type="email" id="emailInput" name="email" placeholder="예) abc@naver.com"
+                            class="form-control input-group-input" autocomplete="email" required />
+                    </div>
+                    <div class="input-error" id="emailError">
+                        올바른 이메일 주소를 입력해주세요.
+                    </div>
+                </div>
+
+                <!-- 비밀번호 입력 -->
+                <div class="input-box">
+                    <label for="passwordInput" class="input-title">비밀번호</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="bi bi-lock"></i>
+                        </span>
+                        <input type="password" id="passwordInput" name="password" placeholder=""
+                            class="form-control input-group-input" autocomplete="current-password" maxlength="16"
+                            required />
+                    </div>
+                    <div class="input-error" id="passwordError">
+                        영문, 숫자, 특수문자를 조합해서 8~16자로 입력해주세요.
+                    </div>
+                </div>
+
+                <!-- 로그인 버튼 -->
+                <div class="login-btn-box">
+                    <button type="submit" id="loginBtn" class="btn btn-primary w-100 login-btn" disabled>
+                        로그인
+                    </button>
+                </div>
+            </form>
+
+            <!-- 링크 목록 -->
+            <ul class="look-box">
+                <li>
+                    <a href="#" class="look-link">회원가입</a>
+                </li>
+                <li>
+                    <a href="#" class="look-link">아이디 찾기</a>
+                </li>
+                <li>
+                    <a href="#" class="look-link">비밀번호 찾기</a>
+                </li>
+            </ul>
+
+            <!-- SNS 로그인 -->
+            <div class="social-login">
+                <button type="button" class="btn btn-outline-success btn-naver" id="naverLogin">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="currentColor"
+                            d="M14.856 12.56 8.92 4H4v16h5.157v-8.56L15.081 20H20V4h-5.144v8.56Z" />
+                    </svg>
+                    네이버로 로그인
+                </button>
+
+                <button type="button" class="btn btn-outline-dark btn-apple" id="appleLogin">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="currentColor"
+                            d="M12.261 7.212a3.901 3.901 0 0 0 1.487-.45 3.822 3.822 0 0 0 1.182-.992 4.554 4.554 0 0 0 1.067-2.78 2.172 2.172 0 0 0 0-.387 4.37 4.37 0 0 0-2.903 1.547 4.288 4.288 0 0 0-1.067 2.686 1.216 1.216 0 0 0 0 .355l.235.021ZM9.134 22.495c1.217 0 1.75-.826 3.266-.826s1.879.805 3.202.805c1.324 0 2.21-1.244 3.042-2.457A11.143 11.143 0 0 0 20 17.205a4.436 4.436 0 0 1-1.927-1.623 4.303 4.303 0 0 1-.71-2.39c.005-.757.203-1.5.576-2.163a4.576 4.576 0 0 1 1.56-1.632 4.55 4.55 0 0 0-1.688-1.466 4.658 4.658 0 0 0-2.198-.5c-1.494 0-2.711.91-3.469.91s-1.91-.857-3.202-.857C6.487 7.484 4 9.574 4 13.39a12.36 12.36 0 0 0 2.06 6.575c1.003 1.39 1.847 2.53 3.074 2.53Z" />
+                    </svg>
+                    Apple로 로그인
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h5>회사 정보</h5>
+                    <p>ShopMall은 고객 만족을 최우선으로 하는 온라인 쇼핑몰입니다.</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 서울특별시 강남구 테헤란로 123</p>
+                    <p><i class="fas fa-phone"></i> 1588-1234</p>
+                    <p><i class="fas fa-envelope"></i> info@shopmall.co.kr</p>
+                </div>
+
+                <div>
+                    <h5>고객 서비스</h5>
+                    <p><a href="#">자주 묻는 질문</a></p>
+                    <p><a href="#">배송 안내</a></p>
+                    <p><a href="#">교환/반품</a></p>
+                    <p><a href="#">이용약관</a></p>
+                    <p><a href="#">개인정보처리방침</a></p>
+                </div>
+
+                <div>
+                    <h5>쇼핑 가이드</h5>
+                    <p><a href="#">구매 가이드</a></p>
+                    <p><a href="#">결제 방법</a></p>
+                    <p><a href="#">적립금 안내</a></p>
+                    <p><a href="#">쿠폰 사용법</a></p>
+                </div>
+
+                <div>
+                    <h5>소셜 미디어</h5>
+                    <p>ShopMall과 함께하세요!</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <hr style="border-color: #34495e;" />
+            <div class="text-center">
+                <p>&copy; 2025 ShopMall. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // DOM 요소 선택
+            const emailInput = document.getElementById('emailInput');
+            const passwordInput = document.getElementById('passwordInput');
+            const loginBtn = document.getElementById('loginBtn');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            const loginForm = document.getElementById('loginForm');
+
+            // 유효성 검사 함수들
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            function isValidPassword(password) {
+                // 영문, 숫자, 특수문자 조합, 8~16자
+                const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,16}$/;
+                return passwordRegex.test(password);
+            }
+
+            function showError(element, show = true) {
+                if (show) {
+                    element.classList.add('show');
+                } else {
+                    element.classList.remove('show');
+                }
+            }
+
+            function validateForm() {
+                const email = emailInput.value.trim();
+                const password = passwordInput.value.trim();
+
+                let isEmailValid = false;
+                let isPasswordValid = false;
+
+                // 이메일 검증
+                if (email === '') {
+                    showError(emailError, false);
+                    isEmailValid = false;
+                } else if (!isValidEmail(email)) {
+                    showError(emailError, true);
+                    isEmailValid = false;
+                } else {
+                    showError(emailError, false);
+                    isEmailValid = true;
+                }
+
+                // 비밀번호 검증
+                if (password === '') {
+                    showError(passwordError, false);
+                    isPasswordValid = false;
+                } else if (!isValidPassword(password)) {
+                    showError(passwordError, true);
+                    isPasswordValid = false;
+                } else {
+                    showError(passwordError, false);
+                    isPasswordValid = true;
+                }
+
+                // 버튼 활성화/비활성화
+                const isFormValid = isEmailValid && isPasswordValid;
+                loginBtn.disabled = !isFormValid;
+
+                return isFormValid;
+            }
+
+            // 실시간 유효성 검사
+            emailInput.addEventListener('input', validateForm);
+            passwordInput.addEventListener('input', validateForm);
+
+            // 폼 제출 처리
+            loginForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                if (!validateForm()) {
+                    return;
+                }
+
+                // 로딩 상태 표시
+                loginBtn.classList.add('btn-loading');
+                loginBtn.textContent = '';
+                loginBtn.disabled = true;
+
+                // 실제 로그인 로직을 여기에 구현
+                setTimeout(() => {
+                    alert('로그인 처리가 완료되었습니다.');
+
+                    // 로딩 상태 해제
+                    loginBtn.classList.remove('btn-loading');
+                    loginBtn.textContent = '로그인';
+                    loginBtn.disabled = false;
+                }, 2000);
+            });
+
+            // SNS 로그인 버튼 이벤트
+            document.getElementById('naverLogin').addEventListener('click', function () {
+                alert('네이버 로그인 페이지로 이동합니다.');
+            });
+
+            document.getElementById('appleLogin').addEventListener('click', function () {
+                alert('Apple 로그인 페이지로 이동합니다.');
+            });
+
+            // 검색 버튼 이벤트
+            document.querySelector('.search-btn').addEventListener('click', function () {
+                const searchValue = document.querySelector('.search-input').value.trim();
+                if (searchValue) {
+                    alert(`'${searchValue}' 검색 결과 페이지로 이동합니다.`);
+                }
+            });
+
+            // 검색 입력에서 Enter 키 처리
+            document.querySelector('.search-input').addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    document.querySelector('.search-btn').click();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
