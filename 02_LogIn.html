@@ -14,6 +14,7 @@
 
     <!-- FontAwesome CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="css/ShopMallAll.css" />
     <link rel="stylesheet" href="css/login.css" />
 </head>
@@ -68,7 +69,7 @@
                 <!-- 이메일 입력 -->
                 <div class="input-box">
                     <label for="emailInput" class="input-title">이메일</label>
-                    <div class="input-group">
+                    <div class="input-group email-input-group">
                         <span class="input-group-text">
                             <i class="bi bi-envelope"></i>
                         </span>
@@ -83,13 +84,16 @@
                 <!-- 비밀번호 입력 -->
                 <div class="input-box">
                     <label for="passwordInput" class="input-title">비밀번호</label>
-                    <div class="input-group">
+                    <div class="input-group password-input-group">
                         <span class="input-group-text">
                             <i class="bi bi-lock"></i>
                         </span>
                         <input type="password" id="passwordInput" name="password" placeholder=""
                             class="form-control input-group-input" autocomplete="current-password" maxlength="16"
                             required />
+                        <button type="button" class="password-toggle" id="passwordToggle" aria-label="비밀번호 표시/숨김">
+                            <i class="bi bi-eye" id="passwordToggleIcon"></i>
+                        </button>
                     </div>
                     <div class="input-error" id="passwordError">
                         영문, 숫자, 특수문자를 조합해서 8~16자로 입력해주세요.
@@ -198,6 +202,21 @@
             const emailError = document.getElementById('emailError');
             const passwordError = document.getElementById('passwordError');
             const loginForm = document.getElementById('loginForm');
+            const passwordToggle = document.getElementById('passwordToggle');
+            const passwordToggleIcon = document.getElementById('passwordToggleIcon');
+
+            // 비밀번호 표시/숨김 기능
+            passwordToggle.addEventListener('click', function () {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+
+                // 아이콘 변경
+                if (type === 'password') {
+                    passwordToggleIcon.className = 'bi bi-eye';
+                } else {
+                    passwordToggleIcon.className = 'bi bi-eye-slash';
+                }
+            });
 
             // 유효성 검사 함수들
             function isValidEmail(email) {
@@ -292,21 +311,6 @@
 
             document.getElementById('appleLogin').addEventListener('click', function () {
                 alert('Apple 로그인 페이지로 이동합니다.');
-            });
-
-            // 검색 버튼 이벤트
-            document.querySelector('.search-btn').addEventListener('click', function () {
-                const searchValue = document.querySelector('.search-input').value.trim();
-                if (searchValue) {
-                    alert(`'${searchValue}' 검색 결과 페이지로 이동합니다.`);
-                }
-            });
-
-            // 검색 입력에서 Enter 키 처리
-            document.querySelector('.search-input').addEventListener('keypress', function (e) {
-                if (e.key === 'Enter') {
-                    document.querySelector('.search-btn').click();
-                }
             });
         });
     </script>
