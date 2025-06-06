@@ -141,16 +141,6 @@
   border-radius: 4px;
 }
 
-.password-toggle:hover {
-  color: var(--primary-color);
-  background-color: rgba(40, 167, 69, 0.1);
-}
-
-.password-toggle:focus {
-  outline: none;
-  color: var(--primary-color);
-}
-
 /* 이메일 입력 필드 우측 모서리 둥글게 처리 */
 .email-input-group .input-group-input {
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
